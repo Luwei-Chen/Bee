@@ -108,9 +108,11 @@ public class CapturePhotoActivity extends AppCompatActivity {
     // Identify the location service status and set the locationManager
     public boolean indentifyLocationService() {
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            Log.v("GPS_PROVIEDER", "Enabled");
             isGpsService = true;
         }
         if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            Log.v("NETWORK_PROVIEDER", "Enabled");
             isNetworkService = true;
         }
         return (isNetworkService || isGpsService);
@@ -122,15 +124,18 @@ public class CapturePhotoActivity extends AppCompatActivity {
         // Check the permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.v("LOCATION_PERMISSION", "Reject");
             return null;
         }
 
         if (isGpsService) {
             photoLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         }
-        if (isNetworkService) {
+        else if (isNetworkService) {
             photoLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
+
+        Log.v("LOCATION_GET", " " + (photoLocation == null));
 
         return photoLocation;
     }
