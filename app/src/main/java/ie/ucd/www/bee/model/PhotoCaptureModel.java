@@ -34,10 +34,10 @@ public class PhotoCaptureModel {
         // In case the exif is null
         String imageFullName = image.getAbsolutePath();
         ExifInterface exif = new ExifInterface(imageFullName);
-        if (exif.getAttribute(ExifInterface.TAG_GPS_ALTITUDE) == null) {
+        if ((exif.getAttribute(ExifInterface.TAG_GPS_ALTITUDE) == null) && (location != null)) {
             exif.setAttribute(ExifInterface.TAG_GPS_ALTITUDE, Double.toString(location.getAltitude()));
         }
-        if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
+        if ((exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) && (location != null)) {
             exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE, Double.toString(location.getLatitude()));
         }
         return image;

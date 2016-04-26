@@ -1,5 +1,6 @@
 package ie.ucd.www.bee;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.preference.PreferenceActivity;
@@ -20,12 +21,13 @@ import java.util.ArrayList;
 
 public class PhotosUploadActivity extends AppCompatActivity {
     private static final String UPLOAD_URL = "";
-    final Intent mainIntent = new Intent(this, MainActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos_upload);
+
+        final Intent mainIntent = new Intent(this, MainActivity.class);
 
         ArrayList<String> photosDir = getIntent().getStringArrayListExtra("photos_dir");
 
@@ -55,7 +57,7 @@ public class PhotosUploadActivity extends AppCompatActivity {
             public void onFailure(int i, cz.msebera.android.httpclient.Header[] headers, byte[] bytes, Throwable throwable) {
 
             }
-        })
+        });
 
     }
 }
